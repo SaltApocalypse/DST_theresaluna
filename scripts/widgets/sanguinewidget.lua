@@ -9,5 +9,5 @@ local SanguineWidget = Class(Widget, function(self, owner)
     self.myimage = self:AddChild(Image("images/sanguine_ui.xml", "sanguine_ui.tex"))
     self.myimage:SetScale(0.5, 0.5)
 end)
-w
+
 return SanguineWidget
