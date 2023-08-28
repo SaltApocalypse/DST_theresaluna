@@ -31,9 +31,10 @@ Assets = {
     Asset("ATLAS", "images/names_gold_esctemplate.xml"),
     -- anim
     -- Asset("ANIM", "anim/esctemplate_anim.zip"),
-    -- Widget SanguineWidget
-    Asset("IMAGE", "images/sanguine_ui.tex"),
-    Asset("ATLAS", "images/sanguine_ui.xml"),
+
+    -- Widget __theresa___image_sanguinebadge_dst/_hi3
+    Asset("IMAGE", "images/__theresa___image_sanguinebadge_dst.tex"),
+    Asset("ATLAS", "images/__theresa___image_sanguinebadge_dst.xml"),
 }
 
 -- 设置GLOBAL变量
@@ -89,16 +90,15 @@ local skin_modes = {
 AddMinimapAtlas("images/map_icons/esctemplate.xml")
 AddModCharacter("esctemplate", "FEMALE", skin_modes)
 
--- Widget 鲜血槽
-
-local SanguineWidget = require("widgets/sanguinewidget")
+-- Widget 鲜血槽 __theresa___image_sanguinebadge_dst
+local __theresa___widget_sanguinebadge_dst = require("widgets/__theresa___widget_sanguinebadge_dst")
 AddClassPostConstruct("widgets/controls", function(self, owner)
-    self.SanguineWidget = self:AddChild(SanguineWidget(self.owner))
+    self.__theresa___widget_sanguinebadge_dst = self:AddChild(__theresa___widget_sanguinebadge_dst(self.owner))
 
-    self.SanguineWidget:SetHAnchor(2)
-    self.SanguineWidget:SetVAnchor(1)
+    self.__theresa___widget_sanguinebadge_dst:SetHAnchor(1)
+    self.__theresa___widget_sanguinebadge_dst:SetVAnchor(1)
 
-    self.SanguineWidget:SetPosition(-200, -100)
+    self.__theresa___widget_sanguinebadge_dst:SetPosition(0, 0)
 
-    self.SanguineWidget:Show()
+    self.__theresa___widget_sanguinebadge_dst:Show()
 end)
