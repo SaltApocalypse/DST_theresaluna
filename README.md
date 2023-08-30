@@ -12,3 +12,4 @@
 
 **文件命名**格式：`角色名_类型_文件名_可选的后缀`
 例如血印槽（饥荒样式）：`__theresa___widget_sanguinebadge_dst`
+
