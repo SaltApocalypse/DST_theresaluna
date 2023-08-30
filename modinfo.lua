@@ -25,22 +25,22 @@ priority = -1
 
 -- 设置
 configuration_options = {
-    {
-        name = "显示",
-        hover = "",
-        options = { { description = "", data = 0 } },
-        default = 0
-    },
-    {
-        name = "display_ui",
-        label = "血印UI样式",
-        hover = "血印UI样式",
-        options = {
-            { description = "默认", data = "dst_like", hover = "像饥荒三维属性那样挂在右上角。" },
-            { description = "崩三血印槽", data = "hi3_like", hover = "像崩三一样置于底部栏上方中间。" },
-        },
-        default = "dst_like",
-    },
+    -- {
+    --     name = "显示",
+    --     hover = "",
+    --     options = { { description = "", data = 0 } },
+    --     default = 0
+    -- },
+    -- {
+    --     name = "display_ui",
+    --     label = "血印UI样式",
+    --     hover = "血印UI样式",
+    --     options = {
+    --         { description = "默认", data = "dst_like", hover = "像饥荒三维属性那样挂在右上角。" },
+    --         { description = "崩三血印槽", data = "hi3_like", hover = "像崩三一样置于底部栏上方中间。" },
+    --     },
+    --     default = "dst_like",
+    -- },
 }
 
 -- [[[============================================================]]]
