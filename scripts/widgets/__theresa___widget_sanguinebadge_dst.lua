@@ -1,8 +1,8 @@
 local Widget = require "widgets/widget"
 local Image = require "widgets/image"
 
-local __theresa___widget_sanguinebadge_dst = Class(Widget, function(self, owner)
-    Widget._ctor(self, "__theresa___widget_sanguinebadge_dst")
+local __theresa___sanguinebadge = Class(Widget, function(self, owner)
+    Widget._ctor(self, "__theresa___sanguinebadge")
     self:SetScale(1, 1)
 
 
@@ -10,4 +10,4 @@ local __theresa___widget_sanguinebadge_dst = Class(Widget, function(self, owner)
         "__theresa___image_sanguinebadge_dst.tex"))
     self.img:SetScale(0.6134, 0.6134)
 end)
-return __theresa___widget_sanguinebadge_dst
+return __theresa___sanguinebadge

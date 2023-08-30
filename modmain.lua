@@ -98,16 +98,16 @@ local skin_modes = {
 AddMinimapAtlas("images/map_icons/__theresa__.xml")
 AddModCharacter("__theresa__", "FEMALE", skin_modes)
 
---[[ __theresa___widget_sanguinebadge_dst ]]
-local __theresa___widget_sanguinebadge_dst = require("widgets/__theresa___widget_sanguinebadge_dst")
+--[[ __theresa___sanguinebadge ]]
+local __theresa___sanguinebadge = require("widgets/__theresa___sanguinebadge")
 AddClassPostConstruct("widgets/controls", function(self, owner)
-    self.__theresa___widget_sanguinebadge_dst = self:AddChild(__theresa___widget_sanguinebadge_dst(self.owner))
+    self.__theresa___sanguinebadge = self:AddChild(__theresa___sanguinebadge(self.owner))
 
-    self.__theresa___widget_sanguinebadge_dst:SetHAnchor(2) -- x坐标-中左右
-    self.__theresa___widget_sanguinebadge_dst:SetVAnchor(1) -- y坐标-中上下
+    self.__theresa___sanguinebadge:SetHAnchor(2) -- x坐标-中左右
+    self.__theresa___sanguinebadge:SetVAnchor(1) -- y坐标-中上下
 
-    -- self.__theresa___widget_sanguinebadge_dst:SetPosition(-93, -366) -- (-93, -365.85)
-    self.__theresa___widget_sanguinebadge_dst:SetPosition(-93, -330) -- (-93, -365.85)
+    -- self.__theresa___sanguinebadge:SetPosition(-93, -366) -- (-93, -365.85)
+    self.__theresa___sanguinebadge:SetPosition(-93, -330) -- (-93, -365.85)
 
-    self.__theresa___widget_sanguinebadge_dst:Show()
+    self.__theresa___sanguinebadge:Show()
 end)
