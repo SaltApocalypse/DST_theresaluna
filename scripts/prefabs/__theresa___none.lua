@@ -19,4 +19,5 @@ return CreatePrefabSkin("__theresa___none",
 		skin_tags = { "__THERESA__", "CHARACTER", "BASE" },
 		build_name_override = "__theresa__",
 		rarity = "Character",
-	})
+	}
+)

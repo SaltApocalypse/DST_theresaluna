@@ -1,15 +1,10 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 
-local assets = {Asset("SCRIPT", "scripts/prefabs/player_common.lua")}
-
--- Your character's stats
-TUNING.__THERESA___HEALTH = 150
-TUNING.__THERESA___HUNGER = 150
-TUNING.__THERESA___SANITY = 200
+local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
 
 -- Custom starting inventory
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.__THERESA__ = {
-    "flint", "flint", "twigs", "twigs"
+    "grass_umbrella"
 }
 
 local start_inv = {}
@@ -22,14 +17,14 @@ local prefabs = FlattenTree(start_inv, true)
 local function onbecamehuman(inst)
     -- Set speed when not a ghost (optional)
     inst.components.locomotor:SetExternalSpeedMultiplier(inst,
-                                                         "__theresa___speed_mod",
-                                                         1)
+        "__theresa___speed_mod",
+        1)
 end
 
 local function onbecameghost(inst)
     -- Remove speed modifier when becoming a ghost
     inst.components.locomotor:RemoveExternalSpeedMultiplier(inst,
-                                                            "__theresa___speed_mod")
+        "__theresa___speed_mod")
 end
 
 -- When loading or spawning the character
@@ -54,7 +49,7 @@ end
 local master_postinit = function(inst)
     -- Set starting inventory
     inst.starting_inventory = start_inv[TheNet:GetServerGameMode()] or
-                                  start_inv.default
+        start_inv.default
 
     -- choose which sounds this character will play
     inst.soundsname = "willow"
@@ -78,4 +73,4 @@ local master_postinit = function(inst)
 end
 
 return MakePlayerCharacter("__theresa__", prefabs, assets, common_postinit,
-                           master_postinit, prefabs)
+    master_postinit, prefabs)
