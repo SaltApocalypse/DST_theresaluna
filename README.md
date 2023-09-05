@@ -17,10 +17,14 @@
 - 月下
 小写：`__theresa__`
 大写：`__THERESA__`
-- 大月下
-小写：`__theresa___grownup`
-大写：`__THERESA___GROWNUP`
+~~- 大月下~~
+~~小写：`__theresa___grownup`~~
+~~大写：`__THERESA___GROWNUP`~~
 
-**文件命名**格式：`角色名_文件名_可选的后缀`
-例如血印槽（饥荒样式）：`__theresa___sanguinebadge`
+~~**文件命名**格式：~~
+~~- 类似官方的那些参考官方的格式~~
+~~- 自定义： `角色名_文件名_可选的后缀`~~
+~~例如血印槽（饥荒样式）：`__theresa___sanguinebadge`~~
 
+## 目前的实现和定义
+1. 组件component：血印槽 `__theresa___sanguine`

@@ -1,12 +1,5 @@
 -- [[============================================================]]
-GLOBAL.setmetatable(
-    env,
-    {
-        __index = function(t, k)
-            return GLOBAL.rawget(GLOBAL, k)
-        end
-    }
-)
+GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 
 -- [[============================================================]]
 -- Assets资源加载
@@ -23,7 +16,7 @@ PrefabFiles = { "__theresa__", "__theresa___none" }
 modimport "modmain/language.lua"
 modimport "modmain/character.lua"
 modimport "modmain/tuning.lua"
--- modimport "modmain/player.lua" -- 玩家相关的修改
+modimport "modmain/player.lua"
 -- modimport "modmain/playernet.lua" -- 玩家网络通讯
 -- modimport "modmain/postprocess.lua" -- 后处理
 -- modimport "modmain/action.lua" -- 动作

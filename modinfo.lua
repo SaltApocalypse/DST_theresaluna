@@ -9,13 +9,8 @@ version = "0.1"
 forumthread = ""
 server_filter_tags = { "character" }
 
-if lang then
-    name = "[DST] Luna_Lindred"
-    description = "CN"
-else
-    name = "[DST] 月下初拥"
-    description = "ZH"
-end
+name = lang and "[DST] Luna_Lindred" or "[DST] 月下初拥"
+description = lang and "EN" or "ZH"
 
 -- DS&DST兼容性
 dst_compatible = true
@@ -52,33 +47,5 @@ configuration_options = {
         default = "cfg_lang_auto"
     }
 }
-
--- -- 设置
--- configuration_options = {
---     AddSectionTitle(T(STRINGS["sectiontitle_formatting"])),
---     {
---         name = "lang",
---         options = {
---             { data = "automatic" },
---             { data = "en" },
---             { data = "zh" },
---         },
---         default = "automatic",
---         client = true,
---         tags = {},
---     },
---     AddSectionTitle(T(STRINGS["sectiontitle_elements"])),
---     {
---         name = "sanguine_ui_sytle",
---         options = {
---             { data = "dst_like" },
---             { data = "hi3_like" },
---         },
---         default = "dst_like",
---         client = true,
---         tags = {},
---     },
---     AddSectionTitle(T(STRINGS["sectiontitle_character"])),
--- }
 
 -- [[============================================================]]

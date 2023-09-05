@@ -1,8 +1,9 @@
+-- [[============================================================]]
 local MakePlayerCharacter = require "prefabs/player_common"
-
 local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
 
--- Custom starting inventory
+-- [[============================================================]]
+-- 初始物品
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.__THERESA__ = {
     "grass_umbrella"
 }
@@ -11,23 +12,22 @@ local start_inv = {}
 for k, v in pairs(TUNING.GAMEMODE_STARTING_ITEMS) do
     start_inv[string.lower(k)] = v.__THERESA__
 end
+
 local prefabs = FlattenTree(start_inv, true)
 
--- When the character is revived from human
+-- [[============================================================]]
+-- 死亡/复活事件回调
 local function onbecamehuman(inst)
-    -- Set speed when not a ghost (optional)
     inst.components.locomotor:SetExternalSpeedMultiplier(inst,
         "__theresa___speed_mod",
         1)
 end
 
 local function onbecameghost(inst)
-    -- Remove speed modifier when becoming a ghost
     inst.components.locomotor:RemoveExternalSpeedMultiplier(inst,
         "__theresa___speed_mod")
 end
 
--- When loading or spawning the character
 local function onload(inst)
     inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
@@ -39,38 +39,28 @@ local function onload(inst)
     end
 end
 
--- This initializes for both the server and client. Tags can be added here.
-local common_postinit = function(inst)
+-- [[============================================================]]
+local function common_postinit(inst)
     -- Minimap icon
     inst.MiniMapEntity:SetIcon("__theresa__.tex")
 end
 
--- This initializes for the server only. Components are added here.
-local master_postinit = function(inst)
-    -- Set starting inventory
-    inst.starting_inventory = start_inv[TheNet:GetServerGameMode()] or
-        start_inv.default
-
-    -- choose which sounds this character will play
-    inst.soundsname = "willow"
-
-    -- Uncomment if "wathgrithr"(Wigfrid) or "webber" voice is used
-    -- inst.talker_path_override = "dontstarve_DLC001/characters/"
-
-    -- Stats	
+-- [[============================================================]]
+local function master_postinit(inst)
+    -- 初始物品
+    inst.starting_inventory = start_inv[TheNet:GetServerGameMode()] or start_inv.default
+    -- 角色声音
+    inst.soundsname = "wendy"
+    -- 三维
     inst.components.health:SetMaxHealth(TUNING.__THERESA___HEALTH)
     inst.components.hunger:SetMax(TUNING.__THERESA___HUNGER)
     inst.components.sanity:SetMax(TUNING.__THERESA___SANITY)
 
-    -- Damage multiplier (optional)
-    inst.components.combat.damagemultiplier = 1
-
-    -- Hunger rate (optional)
-    inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
+    -- 血印槽组件
+    inst:AddComponent("__theresa___sanguine")
 
     inst.OnLoad = onload
     inst.OnNewSpawn = onload
 end
 
-return MakePlayerCharacter("__theresa__", prefabs, assets, common_postinit,
-    master_postinit, prefabs)
+return MakePlayerCharacter("__theresa__", prefabs, assets, common_postinit, master_postinit, prefabs)
