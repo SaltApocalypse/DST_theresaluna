@@ -9,7 +9,7 @@ version = "0.1"
 forumthread = ""
 server_filter_tags = { "character" }
 
-name = lang and "[DST] Luna_Lindred" or "[DST] 月下初拥"
+name = lang and "[DST] Theresa-Luna" or "[DST] 月下"
 description = lang and "EN" or "ZH"
 
 -- DS&DST兼容性

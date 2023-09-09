@@ -2,22 +2,22 @@
 
 -- [[============================================================]]
 -- HUD
-local __Theresa__SanguineBadge = require "widgets/__theresa___sanguniebadge"
+local TheresaLunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
 
 AddClassPostConstruct("widgets/statusdisplays", function(self)
-    if self.owner and self.owner.prefab == "__theresa__" then
-        self.__theresa___sanguine = self:AddChild(__Theresa__SanguineBadge(self.owner))
-        self.__theresa___sanguine:SetPosition(self.column5, 20, 0)
+    if self.owner and self.owner.prefab == "theresaluna" then
+        self.theresaluna_sanguine = self:AddChild(TheresaLunaSanguineBadge(self.owner))
+        self.theresaluna_sanguine:SetPosition(self.column5, 20, 0)
     end
 
     local old_SetGhostMode = self.SetGhostMode
     function self:SetGhostMode(ghostmode, ...)
         old_SetGhostMode(self, ghostmode, ...)
-        if self.__theresa___sanguine then
+        if self.theresaluna_sanguine then
             if self.isghostmode then
-                self.__theresa___sanguine:Hide()
+                self.theresaluna_sanguine:Hide()
             else
-                self.__theresa___sanguine:Show()
+                self.theresaluna_sanguine:Show()
             end
         end
     end

@@ -13,18 +13,18 @@
     - 设置键：`cfg_<key>`
     - 设置值：`cfg_<Key>_<Value>`
 
-**角色名**书写/标签：（暂定，等大月下出来再定夺）
+**角色名**书写/标签：
 - 月下
-小写：`__theresa__`
-大写：`__THERESA__`
+小写：`theresaluna`
+大写：`THERESALUNA`
 ~~- 大月下~~
-~~小写：`__theresa___grownup`~~
-~~大写：`__THERESA___GROWNUP`~~
+~~小写：`theresaluna_grownup`~~
+~~大写：`THERESALUNA_GROWNUP`~~
 
 ~~**文件命名**格式：~~
 ~~- 类似官方的那些参考官方的格式~~
 ~~- 自定义： `角色名_文件名_可选的后缀`~~
-~~例如血印槽（饥荒样式）：`__theresa___sanguinebadge`~~
+~~例如血印槽（饥荒样式）：`theresaluna_sanguinebadge`~~
 
 ## 目前的实现和定义
-1. 组件component：血印槽 `__theresa___sanguine`
+1. 组件component：血印槽 `theresaluna_sanguine`
