@@ -5,11 +5,11 @@ local lang = (locale ~= "zh" and locale ~= "zhr" and locale ~= "zhr") -- true为
 -- [[============================================================]]
 -- 基本信息
 author = "Salt_Apocalypse"
-version = "0.1"
+version = "0.2"
 forumthread = ""
 server_filter_tags = { "character" }
 
-name = lang and "[DST] Theresa-Luna" or "[DST] 月下"
+name = lang and "[DST] Theresa-Luna" or "[DST] 月下初拥"
 description = lang and "EN" or "ZH"
 
 -- DS&DST兼容性
@@ -45,7 +45,23 @@ configuration_options = {
             { description = "中文", data = "cfg_lang" }
         },
         default = "cfg_lang_auto"
-    }
+    },
+    {
+        name = "cfg_lab_abilities",
+        label = lang and "Character Abilities" or "角色能力",
+        options = { { description = "", data = true } },
+        default = true
+    },
+    {
+        name = "cfg_light",
+        label = lang and "Self-illumination" or "自带光源",
+        hover = lang and "The character has the ability to self-illuminate in the dark." or "角色可以在夜间自发光。",
+        options = {
+            { description = lang and "On" or "启用", data = "cfg_light_yes" },
+            { description = lang and "Off" or "未启用", data = "cfg_light_no" }
+        },
+        default = "cfg_light_yes"
+    },
 }
 
 -- [[============================================================]]

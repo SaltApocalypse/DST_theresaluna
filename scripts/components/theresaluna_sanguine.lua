@@ -1,5 +1,5 @@
 -- [[============================================================]]
-local TheresaLunaSanguine = Class(function(self, inst)
+local TheresalunaSanguine = Class(function(self, inst)
     self.inst = inst
     self.max = 100
     self.current = 0
@@ -13,28 +13,28 @@ end)
 
 -- [[============================================================]]
 -- 调整/获取 上限
-function TheresaLunaSanguine:SetMax(max)
+function TheresalunaSanguine:SetMax(max)
     self.max = max
     -- self.current = max
 end
 
-function TheresaLunaSanguine:GetMax()
+function TheresalunaSanguine:GetMax()
     return self.max
 end
 
 -- 调整/获取 现在
-function TheresaLunaSanguine:SetCurrent(current)
+function TheresalunaSanguine:SetCurrent(current)
     self.current = current
 end
 
-function TheresaLunaSanguine:GetCurrent()
+function TheresalunaSanguine:GetCurrent()
     return self.current
 end
 
 --充满
-function TheresaLunaSanguine:Fill()
+function TheresalunaSanguine:Fill()
     self.current = self.max
 end
 
 -- [[============================================================]]
-return TheresaLunaSanguine
+return TheresalunaSanguine

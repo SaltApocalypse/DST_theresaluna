@@ -2,11 +2,11 @@
 
 -- [[============================================================]]
 -- HUD
-local TheresaLunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
+local TheresalunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
 
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     if self.owner and self.owner.prefab == "theresaluna" then
-        self.theresaluna_sanguine = self:AddChild(TheresaLunaSanguineBadge(self.owner))
+        self.theresaluna_sanguine = self:AddChild(TheresalunaSanguineBadge(self.owner))
         self.theresaluna_sanguine:SetPosition(self.column5, 20, 0)
     end
 
