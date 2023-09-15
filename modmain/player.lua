@@ -1,7 +1,7 @@
 -- [[============================================================]]
 
 -- [[============================================================]]
--- HUD
+-- theresaluna_sanguniebadge 血印槽 显示
 local TheresalunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
 
 AddClassPostConstruct("widgets/statusdisplays", function(self)
@@ -22,3 +22,5 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
         end
     end
 end)
+
+-- [[============================================================]]

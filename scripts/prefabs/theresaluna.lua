@@ -1,6 +1,11 @@
 -- [[============================================================]]
+-- 引入
 local MakePlayerCharacter = require "prefabs/player_common"
 local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
+-- 设置
+-- local theresaluna = require ""
+-- local cfg_light = theresaluna.GetModConfigData("cfg_light")
+local cfg_light = TUNING.THERESALUNA_cfg_light
 
 -- [[============================================================]]
 -- 初始物品
@@ -40,6 +45,23 @@ local function onload(inst)
 end
 
 -- [[============================================================]]
+-- cfg_light 角色自发光
+local function self_illumination(inst, data)
+    local light = inst.entity:AddLight()
+    if cfg_light == "cfg_light_no" or TheWorld.state.isday or TheWorld.state.isdusk then
+        inst.Light:SetRadius(0)
+        light:Enable(false)
+    elseif cfg_light == "cfg_light_yes" and TheWorld.state.isnight then
+        inst.Light:Enable(true)
+        inst.Light:SetRadius(0.5)
+        inst.Light:SetFalloff(.4)
+        inst.Light:SetIntensity(.5)
+        -- inst.Light:SetColour(197 / 255, 197 / 255, 50 / 255) -- TODO:选择一个深红的颜色
+        inst.Light:SetColour(127 / 255, 0 / 255, 0 / 255) -- TODO:选择一个深红的颜色
+    end
+end
+
+-- [[============================================================]]
 local function common_postinit(inst)
     -- Minimap icon
     inst.MiniMapEntity:SetIcon("theresaluna.tex")
@@ -56,11 +78,17 @@ local function master_postinit(inst)
     inst.components.hunger:SetMax(TUNING.THERESALUNA_HUNGER)
     inst.components.sanity:SetMax(TUNING.THERESALUNA_SANITY)
 
+    inst.OnLoad = onload
+    inst.OnNewSpawn = onload
+
     -- 血印槽组件
     inst:AddComponent("theresaluna_sanguine")
 
-    inst.OnLoad = onload
-    inst.OnNewSpawn = onload
+    -- 事件监听
+    -- 自带光源
+    inst:ListenForEvent("playeractivated", self_illumination)
+    inst:ListenForEvent("hungerdelta", self_illumination) -- 绑定饥饿度变化事件，实时刷新（之后写了日间光照，可能会改为绑定精神度变化（减少点资源？）
+    -- inst:ListenForEvent("sanitydelta", self_illumination) -- 绑定饥饿度变化事件，实时刷新
 end
 
 return MakePlayerCharacter("theresaluna", prefabs, assets, common_postinit, master_postinit, prefabs)
