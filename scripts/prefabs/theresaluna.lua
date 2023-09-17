@@ -45,7 +45,7 @@ local function onload(inst)
 end
 
 -- [[============================================================]]
---[[cfg_light 角色自发光]]
+--[[cfg_light 夜间光环]]
 local function light_aura(inst, data)
     local light = inst.entity:AddLight()
     if cfg_light == "cfg_light_no" or TheWorld.state.isday or TheWorld.state.isdusk then
@@ -61,6 +61,7 @@ local function light_aura(inst, data)
 end
 -- [[============================================================]]
 --[[自定义理智倍率 -> custom_rate_fn]]
+-- TODO: 还有洞穴和月岛的考虑，主要是洞穴，月岛可能不怎么会考虑
 -- 小月下：白天掉落，晚上不掉落
 local function sanity_custom_setrate()
     if TheWorld.state.isday then
@@ -109,7 +110,6 @@ local function master_postinit(inst)
     -- 基本：标签
     inst:AddTag("theresa")
     inst:AddTag("theresaluna")
-    -- inst:AddTag("theresaluna_grownup")
 
     -- 设定：定义理智倍率 -> custom_rate_fn
     inst.components.sanity.night_drain_mult = 0
@@ -118,7 +118,7 @@ local function master_postinit(inst)
     inst:AddComponent("theresaluna_sanguine")
 
     --[[事件监听]]
-    -- 可选技能：自带光源
+    -- 可选能力：夜间光环
     inst:ListenForEvent("playeractivated", light_aura)
     inst:ListenForEvent("hungerdelta", light_aura) -- 绑定饥饿度变化事件，实时刷新（之后写了日间光照，可能会改为绑定精神度变化（减少点资源？）
     -- inst:ListenForEvent("sanitydelta", light_aura) -- 绑定饥饿度变化事件，实时刷新
