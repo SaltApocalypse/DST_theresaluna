@@ -45,7 +45,7 @@ local function onload(inst)
 end
 
 -- [[============================================================]]
---[[cfg_light 夜间光环]]
+--[[被动技能：夜间光环 -> cfg_light]]
 local function light_aura(inst, data)
     local light = inst.entity:AddLight()
     if cfg_light == "cfg_light_no" or TheWorld.state.isday or TheWorld.state.isdusk then
@@ -60,7 +60,7 @@ local function light_aura(inst, data)
     end
 end
 -- [[============================================================]]
---[[自定义理智倍率 -> custom_rate_fn]]
+--[[被动技能：自定义理智倍率 -> custom_rate_fn]]
 -- TODO: 还有洞穴和月岛的考虑，主要是洞穴，月岛可能不怎么会考虑
 -- 小月下：白天掉落，晚上不掉落
 local function sanity_custom_setrate()
@@ -92,9 +92,22 @@ local function sanity_custom(inst)
 end
 
 -- [[============================================================]]
+--[[被动技能：对蝙蝠友善]]
+local function CLIENT_Theresaluna_HostileTest(inst, target)
+    if target.HostileToPlayerTest ~= nil then
+        return target:HostileToPlayerTest(inst)
+    end
+    return (target:HasTag("hostile"))
+        and (not target:HasTag("bat") and target:HasTag("molebat"))
+end
+
+-- [[============================================================]]
 local function common_postinit(inst)
     -- Minimap icon
     inst.MiniMapEntity:SetIcon("theresaluna.tex")
+
+    -- 修改敌对列表
+    inst.HostileTest = CLIENT_Theresaluna_HostileTest
 end
 
 -- [[============================================================]]

@@ -1,6 +1,5 @@
 -- [[============================================================]]
 
--- TODO: 等大月下出来之后定夺名称
 local name = "theresaluna"
 table.insert(PrefabFiles, name)
 

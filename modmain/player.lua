@@ -24,3 +24,11 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 end)
 
 -- [[============================================================]]
+-- 被动能力 - 蝙蝠友好
+AddPrefabPostInit("baat", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+
+    if inst.
+)
