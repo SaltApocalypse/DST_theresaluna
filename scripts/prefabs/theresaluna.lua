@@ -7,6 +7,7 @@ local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
 -- local cfg_light = theresaluna.GetModConfigData("cfg_light")
 local cfg_light = TUNING.THERESALUNA_cfg_light
 local cfg_burden = TUNING.THERESALUNA_cfg_burden
+local cfg_friendlybats = TUNING.THERESALUNA_cfg_friendlybats
 local cfg_debug = TUNING.THERESALUNA_cfg_debug
 
 
@@ -48,10 +49,10 @@ end
 --[[被动技能：夜间光环 -> cfg_light]]
 local function light_aura(inst, data)
     local light = inst.entity:AddLight()
-    if cfg_light == "cfg_light_no" or TheWorld.state.isday or TheWorld.state.isdusk then
+    if cfg_light == false or TheWorld.state.isday or TheWorld.state.isdusk then
         inst.Light:SetRadius(0)
         light:Enable(false)
-    elseif cfg_light == "cfg_light_yes" and TheWorld.state.isnight then
+    elseif cfg_light == true and TheWorld.state.isnight then
         inst.Light:Enable(true)
         inst.Light:SetRadius(0.5)
         inst.Light:SetFalloff(.4)
@@ -92,7 +93,7 @@ local function sanity_custom(inst)
 end
 
 -- [[============================================================]]
---[[被动技能：对蝙蝠友善]]
+--[[被动技能：对蝙蝠类(bat/molobat)友善]]
 local function CLIENT_Theresaluna_HostileTest(inst, target)
     if target.HostileToPlayerTest ~= nil then
         return target:HostileToPlayerTest(inst)
@@ -107,7 +108,9 @@ local function common_postinit(inst)
     inst.MiniMapEntity:SetIcon("theresaluna.tex")
 
     -- 修改敌对列表
-    inst.HostileTest = CLIENT_Theresaluna_HostileTest
+    if cfg_friendlybats == true then
+        inst.HostileTest = CLIENT_Theresaluna_HostileTest
+    end
 end
 
 -- [[============================================================]]

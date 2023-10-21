@@ -35,10 +35,10 @@ configuration_options = {
         label = "Debug",
         hover = "Debug Mode",
         options = {
-            { description = "Off", data = "cfg_debug_no" },
-            { description = "On",  data = "cfg_debug_yes" }
+            { description = "Off", data = false },
+            { description = "On",  data = true }
         },
-        default = "cfg_debug_no"
+        default = false
     },
     {
         name = "cfg_lab_display",
@@ -80,10 +80,10 @@ configuration_options = {
             and "The character has a aura in the dark.\n\"\""
             or "角色在夜间拥有光环。\n“”",
         options = {
-            { description = lang and "On" or "启用", data = "cfg_light_yes" },
-            { description = lang and "Off" or "未启用", data = "cfg_light_no" }
+            { description = lang and "On" or "启用", data = true },
+            { description = lang and "Off" or "未启用", data = false }
         },
-        default = "cfg_light_yes"
+        default = true
     },
     {
         name = "cfg_burden",
@@ -94,10 +94,24 @@ configuration_options = {
             and "No speed penalty from equipment.\n\"\""
             or "免受部分装备的降低移速惩罚。\n“”",
         options = {
-            { description = lang and "On" or "启用", data = "cfg_burden_yes" },
-            { description = lang and "Off" or "未启用", data = "cfg_burden_no" }
+            { description = lang and "On" or "启用", data = true },
+            { description = lang and "Off" or "未启用", data = false }
         },
-        default = "cfg_burden_yes"
+        default = true
+    },
+    {
+        name = "cfg_friendlybats",
+        label = lang
+            and "Friendly Bats"
+            or "蝙蝠之友",
+        hover = lang
+            and "Bats (and Naked Mole Bats) are no longer hostile.\n\"\""
+            or "\n“蝙蝠和裸鼹蝠不再是敌人。”",
+        options = {
+            { description = lang and "On" or "启用", data = true },
+            { description = lang and "Off" or "未启用", data = false }
+        },
+        default = true
     }
 }
 

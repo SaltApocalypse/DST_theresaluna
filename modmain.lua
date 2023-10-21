@@ -12,6 +12,7 @@ PrefabFiles = { "theresaluna", "theresaluna_none" }
 -- 设置
 TUNING.THERESALUNA_cfg_light = GetModConfigData("cfg_light")
 TUNING.THERESALUNA_cfg_burden = GetModConfigData("cfg_burden")
+TUNING.THERESALUNA_cfg_friendlybats = GetModConfigData("cfg_friendlybats")
 -- debug
 TUNING.THERESALUNA_cfg_debug = GetModConfigData("cfg_debug")
 
