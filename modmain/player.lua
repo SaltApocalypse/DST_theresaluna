@@ -1,5 +1,7 @@
 -- [[============================================================]]
+-- 设置
 local cfg_friendlybats = GetModConfigData("cfg_friendlybats")
+
 -- [[============================================================]]
 -- theresaluna_sanguniebadge 血印槽 显示
 local TheresalunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
@@ -84,9 +86,12 @@ if cfg_friendlybats == "cfg_friendlybats_on" then
     end)
 
     -- NOTE:以下代码会对修改游戏内裸鼹蝠(molebat)的攻击逻辑，可能存在冲突隐患
-    AddPrefabPostInit("molobat", function(inst)
-        -- 重写寻敌函数 Retarget_New
+    AddPrefabPostInit("molebat", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
 
+        -- 重写寻敌函数 Retarget_New
         local function Retarget_New(inst)
             local closest_bug = nil
             local closest_other = nil
@@ -103,7 +108,8 @@ if cfg_friendlybats == "cfg_friendlybats_on" then
 
             for i, e in ipairs(entities_in_range) do
                 if e ~= inst and e.entity:IsVisible() and inst.components.combat:CanTarget(e) then
-                    if closest_bug == nil and e:HasTag("insect") then
+                    if e:HasTag("theresaluna") then -- 直接跳过
+                    elseif closest_bug == nil and e:HasTag("insect") then
                         closest_bug = e
                     elseif closest_other == nil then
                         closest_other = e
@@ -115,12 +121,12 @@ if cfg_friendlybats == "cfg_friendlybats_on" then
                 end
             end
 
-            return (closest_bug and not closest_bug:HasTag("theresaluna"))
-                or (closest_other and not closest_other:HasTag("theresaluna"))
-                or nil
+            return closest_bug or closest_other or nil
         end
 
         -- 重新调用 SetRetargetFunction 函数
         inst.components.combat:SetRetargetFunction(3, Retarget_New)
     end)
 end
+
+-- [[============================================================]]
