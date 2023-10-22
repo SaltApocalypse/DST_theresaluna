@@ -8,7 +8,6 @@ local cfg_burden = TUNING.THERESALUNA_cfg_burden
 local cfg_friendlybats = TUNING.THERESALUNA_cfg_friendlybats
 local cfg_debug = TUNING.THERESALUNA_cfg_debug
 
-
 -- [[============================================================]]
 --[[初始物品]]
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.THERESALUNA = {
@@ -97,7 +96,7 @@ local function CLIENT_Theresaluna_HostileTest(inst, target)
         return target:HostileToPlayerTest(inst)
     end
     return (target:HasTag("hostile"))
-        and (not target:HasTag("bat") and target:HasTag("molebat"))
+        and (not target:HasTag("bat")) -- molobat也含有"bat"这个tag
 end
 
 -- [[============================================================]]
@@ -143,3 +142,5 @@ local function master_postinit(inst)
 end
 
 return MakePlayerCharacter("theresaluna", prefabs, assets, common_postinit, master_postinit, prefabs)
+
+-- [[============================================================]]
