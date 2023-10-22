@@ -1,5 +1,5 @@
 -- [[============================================================]]
-local cfg_friendlybats = TUNING.THERESALUNA_cfg_friendlybats
+local cfg_friendlybats = GetModConfigData("cfg_friendlybats")
 -- [[============================================================]]
 -- theresaluna_sanguniebadge 血印槽 显示
 local TheresalunaSanguineBadge = require "widgets/theresaluna_sanguniebadge"
@@ -25,7 +25,7 @@ end)
 
 -- [[============================================================]]
 -- 被动能力 - 蝙蝠类(bat/molobat)友善
-if cfg_friendlybats == true then
+if cfg_friendlybats == "cfg_friendlybats_on" then
     -- NOTE:以下代码会对修改游戏内蝙蝠(bat)的攻击逻辑，可能存在冲突隐患
     AddPrefabPostInit("bat", function(inst)
         if not GLOBAL.TheWorld.ismastersim then

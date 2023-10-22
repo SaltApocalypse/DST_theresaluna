@@ -3,8 +3,6 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
 -- 设置
--- local theresaluna = require ""
--- local cfg_light = theresaluna.GetModConfigData("cfg_light")
 local cfg_light = TUNING.THERESALUNA_cfg_light
 local cfg_burden = TUNING.THERESALUNA_cfg_burden
 local cfg_friendlybats = TUNING.THERESALUNA_cfg_friendlybats
@@ -48,16 +46,15 @@ end
 -- [[============================================================]]
 --[[被动技能：夜间光环 -> cfg_light]]
 local function light_aura(inst, data)
-    local light = inst.entity:AddLight()
-    if cfg_light == false or TheWorld.state.isday or TheWorld.state.isdusk then
+    if cfg_light == "cfg_light_off" or (not TheWorld.state.isnight) then
+        inst.Light:Enable(false)
         inst.Light:SetRadius(0)
-        light:Enable(false)
-    elseif cfg_light == true and TheWorld.state.isnight then
+    elseif cfg_light == "cfg_light_on" and TheWorld.state.isnight then
         inst.Light:Enable(true)
         inst.Light:SetRadius(0.5)
         inst.Light:SetFalloff(.4)
         inst.Light:SetIntensity(.5)
-        inst.Light:SetColour(127 / 255, 0 / 255, 0 / 255) -- TODO:选择一个深红的颜色
+        inst.Light:SetColour(209 / 255, 8 / 255, 46 / 255)
     end
 end
 -- [[============================================================]]
@@ -108,7 +105,7 @@ local function common_postinit(inst)
     inst.MiniMapEntity:SetIcon("theresaluna.tex")
 
     -- 修改敌对列表
-    if cfg_friendlybats == true then
+    if cfg_friendlybats == "cfg_friendlybats_on" then
         inst.HostileTest = CLIENT_Theresaluna_HostileTest
     end
 end
@@ -137,7 +134,7 @@ local function master_postinit(inst)
     -- 可选能力：夜间光环
     inst:ListenForEvent("playeractivated", light_aura)
     inst:ListenForEvent("hungerdelta", light_aura) -- 绑定饥饿度变化事件，实时刷新（之后写了日间光照，可能会改为绑定精神度变化（减少点资源？）
-    -- inst:ListenForEvent("sanitydelta", light_aura) -- 绑定饥饿度变化事件，实时刷新
+    -- inst:ListenForEvent("sanitydelta", light_aura) -- 绑定理智度变化事件，实时刷新
 
     -- 其他函数
     inst.OnLoad = onload
