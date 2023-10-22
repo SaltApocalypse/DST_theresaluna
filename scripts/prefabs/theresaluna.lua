@@ -57,6 +57,7 @@ local function light_aura(inst, data)
         inst.Light:SetColour(209 / 255, 8 / 255, 46 / 255)
     end
 end
+
 -- [[============================================================]]
 --[[被动技能：自定义理智倍率 -> custom_rate_fn]]
 -- TODO: 还有洞穴和月岛的考虑，主要是洞穴，月岛可能不怎么会考虑
