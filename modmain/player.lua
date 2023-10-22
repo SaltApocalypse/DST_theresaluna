@@ -66,6 +66,7 @@ if cfg_friendlybats == true then
                 return newtarget
             end
         end
+
         -- 重新调用 SetRetargetFunction 函数
         inst.components.combat:SetRetargetFunction(3, Retarget_New)
 
@@ -77,12 +78,49 @@ if cfg_friendlybats == true then
                 inst.components.combat:SetRetargetFunction(3, Retarget_New)
             end
         end
+
         -- 重新调用 OnIsAcidRaining_New 函数
         inst.OnIsAcidRaining = OnIsAcidRaining_New
     end)
 
     -- NOTE:以下代码会对修改游戏内裸鼹蝠(molebat)的攻击逻辑，可能存在冲突隐患
     AddPrefabPostInit("molobat", function(inst)
-        -- inst.components.combat:SetRetargetFunction(3, Retarget)
+        -- 重写寻敌函数 Retarget_New
+
+        local function Retarget_New(inst)
+            local closest_bug = nil
+            local closest_other = nil
+
+            local mx, my, mz = inst.Transform:GetWorldPosition()
+
+            local entities_in_range = TheSim:FindEntities(
+                mx, my, mz,
+                TUNING.MOLEBAT_TARGET_DIST,
+                RETARGET_MUST_TAGS,
+                RETARGET_CANT_TAGS,
+                RETARGET_ONEOF_TAGS
+            )
+
+            for i, e in ipairs(entities_in_range) do
+                if e ~= inst and e.entity:IsVisible() and inst.components.combat:CanTarget(e) then
+                    if closest_bug == nil and e:HasTag("insect") then
+                        closest_bug = e
+                    elseif closest_other == nil then
+                        closest_other = e
+                    end
+
+                    if closest_bug ~= nil and closest_other ~= nil then
+                        break
+                    end
+                end
+            end
+
+            return (closest_bug and not closest_bug:HasTag("theresaluna"))
+                or (closest_other and not closest_other:HasTag("theresaluna"))
+                or nil
+        end
+
+        -- 重新调用 SetRetargetFunction 函数
+        inst.components.combat:SetRetargetFunction(3, Retarget_New)
     end)
 end

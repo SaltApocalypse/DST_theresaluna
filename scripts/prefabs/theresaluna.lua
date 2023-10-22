@@ -4,7 +4,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 local assets = { Asset("SCRIPT", "scripts/prefabs/player_common.lua") }
 -- 设置
 -- local theresaluna = require ""
--- local cfg_light = theresaluna.GetModConfigData("cfg_light")
 local cfg_light = TUNING.THERESALUNA_cfg_light
 local cfg_burden = TUNING.THERESALUNA_cfg_burden
 local cfg_friendlybats = TUNING.THERESALUNA_cfg_friendlybats
@@ -48,18 +47,32 @@ end
 -- [[============================================================]]
 --[[被动技能：夜间光环 -> cfg_light]]
 local function light_aura(inst, data)
-    local light = inst.entity:AddLight()
+    if cfg_light == true then
+        print("=========light")
+    end
+    if TheWorld.state.isday or TheWorld.state.isdusk then
+        print("=========not night")
+    end
+    if TheWorld.state.isnight then
+        print("=========night")
+    end
+    if TheWorld:HasTag("cave") then
+        print("=========cave")
+    end
+
     if cfg_light == false or TheWorld.state.isday or TheWorld.state.isdusk then
         inst.Light:SetRadius(0)
-        light:Enable(false)
+        inst.Light:Enable(false)
     elseif cfg_light == true and TheWorld.state.isnight then
         inst.Light:Enable(true)
         inst.Light:SetRadius(0.5)
         inst.Light:SetFalloff(.4)
         inst.Light:SetIntensity(.5)
-        inst.Light:SetColour(127 / 255, 0 / 255, 0 / 255) -- TODO:选择一个深红的颜色
+        -- inst.Light:SetColour(127 / 255, 0 / 255, 0 / 255) -- TODO:选择一个深红的颜色
+        inst.Light:SetColour(209 / 255, 8 / 255, 46 / 255)
     end
 end
+
 -- [[============================================================]]
 --[[被动技能：自定义理智倍率 -> custom_rate_fn]]
 -- TODO: 还有洞穴和月岛的考虑，主要是洞穴，月岛可能不怎么会考虑
